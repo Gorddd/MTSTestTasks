@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using System.ComponentModel;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 class Program
 {
@@ -18,8 +20,6 @@ class Program
     {
         FifthSolution();
     }
-
-
 
 
     static void FirstSolution()
@@ -51,10 +51,10 @@ class Program
         process.WaitForExit();
     }
 
-    static void FifthSolution()
+    static void FifthSolution() // https://csharpcoderr.com/1320/
     {
         var process = Process.GetCurrentProcess();
-        StopCurrentThread();
+        TerminateProcess((IntPtr)process.Id);
     }
 
     private static void StopCurrentThread() //Вспомогательный метод
@@ -62,4 +62,36 @@ class Program
         AutoResetEvent waitHandler = new AutoResetEvent(false);
         waitHandler.WaitOne(); //Остановить текущий поток
     }
+
+    #region WinAPI
+
+    [DllImport("kernel32.dll", SetLastError = true)]
+    static extern IntPtr OpenProcess(uint dwDesiredAccess, bool bInheritHandle, IntPtr dwProcessId);
+
+    [DllImport("kernel32.dll", SetLastError = true)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    static extern bool CloseHandle(IntPtr hObject);
+
+    [DllImport("kernel32.dll", SetLastError = true)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    static extern bool TerminateProcess(int hProcess, uint uExitCode);
+
+    const uint PROCESS_TERMINATE = 0x1;
+
+    private static void TerminateProcess(IntPtr PID)
+    {
+        IntPtr hProcess = OpenProcess(PROCESS_TERMINATE, false, PID);
+
+        if (hProcess == IntPtr.Zero)
+            throw new Win32Exception(
+            Marshal.GetLastWin32Error());
+
+        if (!TerminateProcess((int)hProcess, 0))
+            throw new Win32Exception(
+            Marshal.GetLastWin32Error());
+
+        CloseHandle(hProcess);
+    }
+
+    #endregion
 }
