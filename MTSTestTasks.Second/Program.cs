@@ -14,6 +14,16 @@ class Program
             _number = number;
         }
 
+        public static string operator +(Number fNum, string sNum) =>
+            (fNum._number + int.Parse(sNum)).ToString();
+
+        public static Number operator +(Number fNum, Number sNum) =>
+            new Number(fNum._number + sNum._number);
+
+        public static int operator +(Number fNum, int sNum) =>
+            fNum._number + sNum;
+
+
         public override string ToString()
         {
             return _number.ToString(_ifp);
