@@ -5,6 +5,8 @@ VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTSTestTasks.First", "MTSTestTasks.First\MTSTestTasks.First.csproj", "{45878EE7-FEE4-454A-B71F-DFC6152C2906}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTSTestTasks.Second", "MTSTestTasks.Second\MTSTestTasks.Second.csproj", "{F80AAD65-9131-4E94-B4E0-8C8E980DD179}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{45878EE7-FEE4-454A-B71F-DFC6152C2906}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45878EE7-FEE4-454A-B71F-DFC6152C2906}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45878EE7-FEE4-454A-B71F-DFC6152C2906}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F80AAD65-9131-4E94-B4E0-8C8E980DD179}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F80AAD65-9131-4E94-B4E0-8C8E980DD179}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F80AAD65-9131-4E94-B4E0-8C8E980DD179}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F80AAD65-9131-4E94-B4E0-8C8E980DD179}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
