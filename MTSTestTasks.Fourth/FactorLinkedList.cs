@@ -2,24 +2,57 @@
 
 internal class FactorSortedList
 {
+    public FactorSortedList(int sortFactor)
+    {
+        SortFactor = sortFactor;
+    }
+
     private Node First { get; set; }
 
-    private Node Last { get; set; }
+    private readonly int SortFactor;
 
-    private int currentMax;
+    int currentMax;
+
+    bool isInitialized = false;
 
     public IEnumerable<int> InsertAndTake(int item)
     {
-        if (item <= currentMax)
+        if (!isInitialized)
+        {
+            Insert(item);
+            isInitialized = true;
+            currentMax = item;
+        }
+        else if (item <= currentMax)
             Insert(item);
         else
         {
-            int offset = item - currentMax;
+            currentMax = item;
+            int controlValue = item - SortFactor;
 
-            foreach (var itemToReturn in Take(offset))
-                yield return itemToReturn;
+            var currentNode = First;
+            while(currentNode != null)
+            {
+                if (currentNode.Value <= controlValue)
+                    yield return currentNode.Value;
+                else
+                    break;
+
+                currentNode = currentNode.Next;
+            }
+            First = currentNode;
 
             Insert(item);
+        }
+    }
+
+    public IEnumerable<int> Take()
+    {
+        var currentNode = First;
+        while(currentNode != null)
+        {
+            yield return currentNode.Value;
+            currentNode = currentNode.Next;
         }
     }
 
@@ -27,34 +60,28 @@ internal class FactorSortedList
     {
         if (First == null)
         {
-            First = Last = new Node(value);
+            First = new Node(value);
             return;
         }
 
-        var currentNode = First;
-        while (currentNode.Next != null)
+        if (First.Next == null)
+            if (First.Value > value)
+                First = new Node(value) { Next = First };
+            else
+                First.Next = new Node(value);
+        else
         {
-            if (currentNode.Next.Value > value)
-                break;
-            currentNode = currentNode.Next;
-        }
+            var currentNode = First;
+            while (currentNode.Next != null)
+            {
+                if (currentNode.Next.Value > value)
+                    break;
+                currentNode = currentNode.Next;
+            }
 
-        var newNode = new Node(value) { Next = currentNode.Next };
-        currentNode.Next = newNode;
-        
-        if (Last == currentNode)
-            Last = newNode;
-    }
-
-    private IEnumerable<int> Take(int amount)
-    {
-        var currentNode = First;
-        for (int i = 0; i < amount && currentNode != null; i++)
-        {
-            yield return currentNode.Value;
-            currentNode = currentNode.Next;
+            var newNode = new Node(value) { Next = currentNode.Next };
+            currentNode.Next = newNode;
         }
-        First = currentNode;
     }
 
     class Node

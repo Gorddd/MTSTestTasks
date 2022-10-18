@@ -4,39 +4,21 @@ class Program
 {
     public static void Main()
     {
-        var collection = Sort(new[] { 1, 0, 4, 6, 2, 8, 5 }, 4, 8);
+        var collection = Sort1(new[] { 4, 3, 9, 7, 8, 9, 10, 14 }, 4);
         foreach (var item in collection)
         {
             Console.Write(item + " ");
         }
     }
 
-    public static IEnumerable<int> Sort(IEnumerable<int> inputStream, int sortFactor, int maxValue)
+    public static IEnumerable<int> Sort1(IEnumerable<int> inputStream, int sortFactor)
     {
-        var linkedList = new FactorSortedList();
+        var linkedList = new FactorSortedList(sortFactor);
         foreach (var item in inputStream)
-        {
-            
-        }
-        
+            foreach (var itemToReturn in linkedList.InsertAndTake(item))
+                yield return itemToReturn;
+        foreach (var item in linkedList.Take()) //берем оставшиеся
+            yield return item;
     }
 
-    private static void InsertInSortedLinkedList(LinkedList<int> linkedList, int value)
-    {
-        LinkedListNode<int> currentNode = linkedList.First;
-        if (currentNode == null)
-        {
-            linkedList.AddLast(value);
-            return;
-        }
-
-        while(currentNode != null)
-        {
-            if (currentNode.Value > value)
-                break;
-            currentNode = currentNode.Next;
-        }
-
-        linkedList.AddBefore(currentNode, value);
-    }
 }
