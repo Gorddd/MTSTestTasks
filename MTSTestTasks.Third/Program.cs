@@ -2,7 +2,7 @@
 {
     public static void Main()
     {
-        var collection = new[] { 1, 2, 3, 4, 5, 6, 7, 8 }.EnumerateFromTail(5);
+        var collection = new int[] { 1, 2, 3, 4, 5, 6, 7, 8 }.EnumerateFromTail(5);
 
         foreach (var item in collection)
             Console.Write($"({item.item}, {item.tail}) ");
@@ -11,12 +11,14 @@
 
 static class Extension
 {
-    /* Решение только с одним перебором значений невозможно, 
+    /* Решение только с одним перебором значений возможно лишь при tailLength = 0, 
      * т.к IEnumerable позволяет обходить коллекцию только с начала 
      * и не содержит свойства Count, как например ICollection */
     public static IEnumerable<(T item, int? tail)> EnumerateFromTail<T>(this IEnumerable<T> enumerable, int? tailLength)
     {
-        var length = enumerable.Count(); //Первый проход по коллекции
+        int length = 0;
+        if (tailLength != 0)
+            length = enumerable.Count(); //Первый проход по коллекции
 
         if (length < tailLength || tailLength < 0)
             throw new ArgumentOutOfRangeException
@@ -28,7 +30,7 @@ static class Extension
 
         foreach (var item in enumerable) //Второй проход по коллекции
         {
-            if (index >= startIndex)
+            if (tailLength != 0 && index >= startIndex)
             {
                 yield return (item, countedValue);
                 countedValue--;
