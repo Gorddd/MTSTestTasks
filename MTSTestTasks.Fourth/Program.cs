@@ -1,6 +1,6 @@
 ﻿namespace MTSTestTasks.Fourth;
 
-class Program
+public class Program
 {
     public static void Main()
     {

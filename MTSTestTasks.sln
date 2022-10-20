@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTSTestTasks.Third", "MTSTe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTSTestTasks.Fourth", "MTSTestTasks.Fourth\MTSTestTasks.Fourth.csproj", "{2CC73883-44F7-4179-8049-22E29B2ABABF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTSTestTasks.Fifth", "MTSTestTasks.Fifth\MTSTestTasks.Fifth.csproj", "{23ED8522-FB1E-437B-BC01-0BDBCEBB7EB5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTSTestTasks.Fifth", "MTSTestTasks.Fifth\MTSTestTasks.Fifth.csproj", "{23ED8522-FB1E-437B-BC01-0BDBCEBB7EB5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FourthTaskTests", "FourthTaskTests\FourthTaskTests.csproj", "{5F909C3E-2499-4EEA-8C7A-67C527282B1E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{23ED8522-FB1E-437B-BC01-0BDBCEBB7EB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23ED8522-FB1E-437B-BC01-0BDBCEBB7EB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23ED8522-FB1E-437B-BC01-0BDBCEBB7EB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F909C3E-2499-4EEA-8C7A-67C527282B1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F909C3E-2499-4EEA-8C7A-67C527282B1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F909C3E-2499-4EEA-8C7A-67C527282B1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F909C3E-2499-4EEA-8C7A-67C527282B1E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
