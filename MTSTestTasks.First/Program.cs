@@ -16,13 +16,12 @@ class Program
         Console.ReadKey();
     }
 
-    static void FailProcess()
+    static void FailProcess() 
     {
-        FifthSolution();
+        FifthSolution(); //Вставлять сюда
     }
 
-
-    static void FirstSolution()
+    static void FirstSolution() 
     {
         Environment.Exit(0);
     }
@@ -51,7 +50,7 @@ class Program
         process.WaitForExit();
     }
 
-    static void FifthSolution() // https://csharpcoderr.com/1320/
+    static void FifthSolution()
     {
         var process = Process.GetCurrentProcess();
         TerminateProcess((IntPtr)process.Id);
