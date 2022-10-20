@@ -32,7 +32,7 @@ class Program
             if (int.TryParse(num, out int parsedNum))
                 return parsedNum;
             else
-                throw new ArgumentException($"Can't parse {num} to int");
+                throw new ArgumentException($"Can't parse \"{num}\" to int");
         }
 
         public override string ToString()
