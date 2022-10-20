@@ -14,8 +14,12 @@ class Program
             _number = number;
         }
 
-        public static string operator +(Number fNum, string sNum) =>
-            (fNum._number + int.Parse(sNum)).ToString();
+        public static string operator +(Number fNum, string sNum)
+        {
+            int parsedSNum = ValidateNum(sNum);
+
+            return (fNum._number + parsedSNum).ToString();
+        }
 
         public static Number operator +(Number fNum, Number sNum) =>
             new Number(fNum._number + sNum._number);
@@ -23,6 +27,13 @@ class Program
         public static int operator +(Number fNum, int sNum) =>
             fNum._number + sNum;
 
+        private static int ValidateNum(string num)
+        {
+            if (int.TryParse(num, out int parsedNum))
+                return parsedNum;
+            else
+                throw new ArgumentException($"Can't parse {num} to int");
+        }
 
         public override string ToString()
         {
