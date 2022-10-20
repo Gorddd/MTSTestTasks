@@ -4,24 +4,16 @@ class Program
 {
     public static void Main()
     {
-        var collection = Sort2(new[] { 4, 3, 9, 7, 8, 9, 10, 14 }, 4);
+        var collection = Sort(new[] { 3, 2, 1, 0, 7 }, 3);
         foreach (var item in collection)
         {
             Console.Write(item + " ");
         }
     }
 
-    public static IEnumerable<int> Sort1(IEnumerable<int> inputStream, int sortFactor)
-    {
-        var linkedList = new FactorSortedList(sortFactor);
-        foreach (var item in inputStream)
-            foreach (var itemToReturn in linkedList.InsertAndTake(item))
-                yield return itemToReturn;
-        foreach (var item in linkedList.Take()) //берем оставшиеся
-            yield return item;
-    }
-
-    public static IEnumerable<int> Sort2(IEnumerable<int> inputStream, int sortFactor)
+    /* Оптимально по памяти: O(n) в худшем случае, зависит от sortFactor, чем меньше тем чаще освобождается
+     * Оптимально по времени: O(n^2) в худшем случае, зависит от частоты встречи элемента большего всех остальных */
+    public static IEnumerable<int> Sort(IEnumerable<int> inputStream, int sortFactor)
     {
         var dict = new Dictionary<int, int>();
         int minNotReturned = 0;
@@ -47,6 +39,7 @@ class Program
                         yield return minNotReturned;
                         dict[minNotReturned]--;
                     }
+                    dict.Remove(minNotReturned); //O(1)
                 }
                 minNotReturned++;
             }
