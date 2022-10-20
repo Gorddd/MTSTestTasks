@@ -17,12 +17,12 @@ static class Extension
     public static IEnumerable<(T item, int? tail)> EnumerateFromTail<T>(this IEnumerable<T> enumerable, int? tailLength)
     {
         int length = 0;
+
+        tailLength = tailLength ?? 0;
         if (tailLength != 0)
             length = enumerable.Count(); //Первый проход по коллекции
-
-        if (length < tailLength || tailLength < 0)
-            throw new ArgumentOutOfRangeException
-                ($"{nameof(tailLength)} can't be greater than number of elements in {nameof(enumerable)} or less than 0");
+        
+        Validate(tailLength, length);
 
         int index = 0,
             startIndex = length - (tailLength ?? 0),
@@ -40,5 +40,12 @@ static class Extension
 
             index++;
         }
+    }
+
+    private static void Validate(int? tailLength, int collectionLength)
+    {
+        if (collectionLength < tailLength || tailLength < 0)
+            throw new ArgumentOutOfRangeException
+                ($"{nameof(tailLength)} can't be greater than number of elements in collection or less than 0");
     }
 }
